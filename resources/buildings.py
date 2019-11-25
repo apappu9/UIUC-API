@@ -1,5 +1,6 @@
 from flask_restful import Resource
-import urllib2, os, json
+import os, json
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 dir = os.path.dirname(__file__)

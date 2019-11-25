@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from bs4 import BeautifulSoup
-import urllib2
+from urllib.request import urlopen
 import geocoder
 import json
 import re
@@ -8,7 +8,7 @@ import re
 class Wifi(Resource):
     def get(self):
         request_url = "http://web.archive.org/web/20151229092233/https://www.cites.illinois.edu/wireless/locations.html"
-        response = urllib2.urlopen(request_url)
+        response = urlopen(request_url)
         soup = BeautifulSoup(response, "html.parser")
         addresses = []
         for x in range(0, 313):

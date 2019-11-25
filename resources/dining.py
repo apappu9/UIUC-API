@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-import urllib2
+from  urllib.request import urlopen
 import json
 import requests
 
@@ -8,7 +8,7 @@ class DiningToday(Resource):
         request_url = "https://web.housing.illinois.edu/MobileDining2/WebService/Search.aspx?k=7A828F94-620B-4EE3-A56F-328036CC3C04"
         # Add route parameters
         request_url += "&id=" + hall + "&t=json"
-        response = urllib2.urlopen(request_url)
+        response = urlopen(request_url)
         try:
             return json.load(response)
         except ValueError:
@@ -19,7 +19,7 @@ class Dining(Resource):
         request_url = "https://web.housing.illinois.edu/MobileDining2/WebService/Search.aspx?k=7A828F94-620B-4EE3-A56F-328036CC3C04"
         # Add route parameters
         request_url += "&id=" + hall + "&from=" + dateFrom + "&to=" + dateTo + "&t=json"
-        response = urllib2.urlopen(request_url)
+        response = urlopen(request_url)
         try:
             return json.load(response)
         except ValueError:
@@ -30,7 +30,7 @@ class DiningSearch(Resource):
         request_url = "https://web.housing.illinois.edu/MobileDining/WebService/MobileDining.asmx/SearchMenus?k=7A828F94-620B-4EE3-A56F-328036CC3C04&SearchPhrase="
         # Add search query
         request_url += query
-        response = urllib2.urlopen(request_url)
+        response = urlopen(request_url)
         return json.load(response)
 
 #class DiningBalance(Resource):
@@ -52,5 +52,5 @@ class DiningSearch(Resource):
 class DiningInformation(Resource):
     def get(self):
         request_url = "https://web.housing.illinois.edu/MobileDining/WebService/SettingTable.aspx?k=7A828F94-620B-4EE3-A56F-328036CC3C04&t=json&ts=5-10-2012%2014:30:00"
-        response = urllib2.urlopen(request_url)
+        response = urlopen(request_url)
         return json.load(response)

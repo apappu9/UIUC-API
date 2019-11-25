@@ -1,7 +1,7 @@
 from flask_restful import Resource
-import urllib2
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
-import xml2json
+# import xml2json
 
 
 BASE_URL = "http://www.fightingillini.com/schedule.aspx?path="
@@ -14,7 +14,7 @@ sports = ['baseball', 'mbball', 'mcross', 'football', 'mgolf',
 '''class AthleticSchedule(Resource):
     def get(self, sport):
         request_url = 'http://app-uiuc-ncaa.yinzcam.com/V1/Game/List/?teamid=uiuc-' + sport + '&version=4.6&app_version=1.0.1&mcc=310&width=640&application=NCAA_UIUC&schoolid=UIUC&os=iOS&mnc=260&height=1136&os_version=9.1&ff=mobile&carrier=T-Mobile'
-        request = urllib2.urlopen(request_url)
+        request = urlopen(request_url)
         print(type(request))
         return xml2json.xml2json(request.read(), None)'''
 
@@ -22,8 +22,8 @@ class AthleticSchedule(Resource):
     def get(self, sport):
         if sport.lower() in sports:
             request_url = BASE_URL + sport
-            req = urllib2.Request(request_url, None, {'User-agent': 'Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11'})
-            request = urllib2.urlopen(req)
+            req = Request(request_url, None, {'User-agent': 'Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11'})
+            request = urlopen(req)
             soup = BeautifulSoup(request, 'html.parser')
             retval = {}
             gamelist = []

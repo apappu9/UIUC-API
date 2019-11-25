@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource
-from werkzeug.contrib.cache import SimpleCache
+# from werkzeug.contrib.cache import SimpleCache
 
 from resources.dining import Dining, DiningInformation, DiningSearch, DiningToday
 #from resources.weather import Weather
@@ -17,7 +17,7 @@ from resources.calendar import Calendar
 
 app = Flask(__name__)
 api = Api(app)
-cache = SimpleCache(app)
+# cache = SimpleCache(app)
 
 # Define routes
 api.add_resource(Main, '/')

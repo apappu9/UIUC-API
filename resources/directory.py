@@ -1,5 +1,6 @@
 from flask_restful import Resource
-import urllib2, json, os
+import json, os
+from urllib.request import urlopen
 
 dir = os.path.dirname(__file__)
 filename = os.path.join(dir, '../tools/professors.json')

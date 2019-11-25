@@ -1,13 +1,13 @@
 from flask_restful import Resource
 from bs4 import BeautifulSoup
-import urllib2
+from urllib.request import urlopen
 import re
 
 data = {}
 
 class Weather(Resource):
     global data
-    webpage = urllib2.urlopen('https://www.atmos.illinois.edu/weather/')
+    webpage = urlopen('https://www.atmos.illinois.edu/weather/')
     soup = BeautifulSoup(webpage, "html.parser")
     location = str(soup.find_all('font')[3])
     match = re.compile(r'<b>(.*?)<br>(.*?)<\/br>')
@@ -30,7 +30,7 @@ class Weather(Resource):
     data['winds'] = match.search(weather_data).group(1)
     match = re.compile('Visibility:.*?([0-9]+.*?)\\n')
     data['visibility'] = match.search(weather_data).group(1)
-    match = re.compile('Pressure:.*?(([0-9]+(\.[0-9][0-9]?)?).*?)\\n(.*?)\\n')
+    match = re.compile(r'Pressure:.*?(([0-9]+(\.[0-9][0-9]?)?).*?)\\n(.*?)\\n')
     data['pressure'] = match.search(weather_data).group(1)
 
     data['latestRadarImage'] = "https://www.atmos.illinois.edu/weather/tree/prods/current/nicerad/nicerad_N.gif"

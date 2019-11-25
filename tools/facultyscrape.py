@@ -1,8 +1,9 @@
 from flask_restful import Resource
-import urllib2, json
+import json
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-request = urllib2.urlopen('http://illinois.edu/ds/facultyListing')
+request = urlopen('http://illinois.edu/ds/facultyListing')
 soup = BeautifulSoup(request, 'html.parser')
 retval = []
 for x in soup.find_all(class_='ws-ds-college-name'):
@@ -34,7 +35,7 @@ for x in soup.find_all(class_='ws-ds-college-name'):
             retval.append(ret)
         x = x.next_sibling
         if (x is not None):
-        condition = x is not None and x.name != u'br'
+            condition = x is not None and x.name != u'br'
 finalreturn = {}
 finalreturn['data'] = retval
 with open('professors.json', 'w') as outfile:

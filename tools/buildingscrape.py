@@ -1,7 +1,8 @@
-import urllib2, json
+import json
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-request = urllib2.urlopen('http://fs.illinois.edu/about-us/building-list-by-building-number')
+request = urlopen('http://fs.illinois.edu/about-us/building-list-by-building-number')
 soup = BeautifulSoup(request, 'html.parser')
 retval = []
 for x in soup.find_all('tr'):
