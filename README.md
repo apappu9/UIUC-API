@@ -47,11 +47,11 @@ List of Halls:
 | Busey-Evans | Busey Bean and Green | buseybeanandgreen | 11 |
 | Busey-Evans | Oodles | oodles | 19 |
 
-*`Hall` route parameter can use the Hall ID or Hall nickname when querying.*
+*`Hall` route parameter must use the Hall ID when querying.*
 
 Example Query:
 ```
-http://uiuc-api.herokuapp.com/dining/par/2015-11-08/2015-11-08
+http://uiuc-api.herokuapp.com/dining/2/2015-11-08/2015-11-08
 ```
 
 Response:
@@ -95,7 +95,7 @@ Response:
 
 Example query:
 ```
-https://uiuc-api.herokuapp.com/dining/par
+https://uiuc-api.herokuapp.com/dining/2
 ```
 
 
